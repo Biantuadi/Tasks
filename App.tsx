@@ -1,3 +1,5 @@
+// App.tsx
+
 import React, { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
@@ -8,7 +10,6 @@ import Register from "./pages/auth/register/Register";
 import { MyTabs } from "./components/layouts/BottomNavigation";
 import EditProfile from "./pages/profile/EditProfile";
 import ShowTask from "./pages/task/ShowTask";
-import { showMessage } from "./utils/base_utils";
 import NewCreateTask from "./pages/task/new_create_task/NewCreateTask";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -20,7 +21,6 @@ export default function App() {
 
   // Fonction pour vérifier si l'utilisateur est connecté
   useEffect(() => {
-    // Logique pour vérifier si l'utilisateur est connecté, par exemple en vérifiant s'il existe un token d'authentification dans AsyncStorage
     const fetchUser = async () => {
       try {
         const userString = await AsyncStorage.getItem("user");
@@ -29,7 +29,7 @@ export default function App() {
           setUser(userObject.user);
         }
       } catch (error) {
-        console.error("Error retrieving user from AsyncStorage:", error);
+        console.error("Error retrieving user from AsyncStorage : ", error);
       } finally {
         setInitializing(false);
       }
@@ -38,14 +38,21 @@ export default function App() {
     fetchUser();
   }, []);
 
-
   if (initializing) {
     return null; // Ou un indicateur de chargement
   }
 
   return (
     <Provider store={store}>
-      <Root user={user} />
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          {user ? (
+            <Stack.Screen name="ProtectedScreens" component={ProtectedScreens} initialParams={{ user }} />
+          ) : (
+            <Stack.Screen name="AuthScreens" component={AuthStack} />
+          )}
+        </Stack.Navigator>
+      </NavigationContainer>
     </Provider>
   );
 }
@@ -59,15 +66,8 @@ function AuthStack() {
   );
 }
 
-function Root({ user }: { user: any }) {
-  return (
-    <NavigationContainer>
-      {user ? <ProtectedScreens user={user} /> : <AuthStack />}
-    </NavigationContainer>
-  );
-}
-
-function ProtectedScreens({ user }: { user: any }) {
+function ProtectedScreens({ navigation, route }: { navigation: any; route: any }) {
+  const user = route.params.user;
   const ProtectedStack = createNativeStackNavigator();
 
   return (

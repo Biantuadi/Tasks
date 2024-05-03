@@ -58,6 +58,7 @@ export default function TaskCard({
         }
       >
         <BadgeAndType>
+
           <BadgeContainer>
             <BadgeText>{capitalizeFirstLetter(item.status)}</BadgeText>
           </BadgeContainer>
@@ -67,28 +68,39 @@ export default function TaskCard({
               : "Type"}
           </TypeText>
         </BadgeAndType>
+
         <ContainerTitle>
           <Title>{ellipsisText(item.title, 19)}</Title>
-          <SubTitle>{`${item.start} - ${item.end}`}</SubTitle>
-        </ContainerTitle>
-
-        <Footer>
-          <ContainerInfo>
-            {!isEmpty(author) && author?.avatar && (
-              <CircleAvatar
-                image={author.avatar}
-                style={{ width: 22, height: 22 }}
-              />
-            )}
-            {!isEmpty(author) && author?.firstname && author?.id && (
-              <TextInfo>
+          {/* <SubTitle>{`${item.start} - ${item.end}`}</SubTitle> */}
+          {!isEmpty(author) && author?.firstname && author?.id && (
+              <SubTitle>
                 {author?.id === currentUserID
                   ? "Créé par vous"
                   : author?.role.toLowerCase() === "pasteur"
                   ? "Créé par le pasteur"
                   : `Créé par ${author.firstname}`}
+              </SubTitle>
+            )}
+        </ContainerTitle>
+
+        <Footer>
+          <ContainerInfo>
+          {!isEmpty(author) && author?.firstname && author?.id && (
+              <TextInfo>
+                {author?.id === currentUserID
+                  ? "Assigné à"
+                  : author?.role.toLowerCase() === "pasteur"
+                  ? "Créé par le pasteur"
+                  : `Créé par ${author.firstname}`}
               </TextInfo>
             )}
+            {!isEmpty(author) && author?.avatar && (
+              <CircleAvatar
+                image={author.avatar}
+                style={{ width: 20, height: 20 }}
+              />
+            )}
+            
           </ContainerInfo>
           <Ionicons name="eye" size={22} color="#1E263B" />
         </Footer>

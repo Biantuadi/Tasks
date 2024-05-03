@@ -9,13 +9,15 @@ import { logoutUser } from "../../redux/actions/authActions";
 import { useDispatch } from "react-redux";
 import CustomAlert from "../../components/CustomAlert";
 import HeaderProfile from "./widgets/HeaderProfile";
+import { useNavigation } from "@react-navigation/native";
 
 interface Props {
   navigation: any;
   currentUserID: string;
 }
 
-const Profile = ({ navigation, currentUserID }: Props) => {
+const Profile = ({  currentUserID }: Props) => {
+  const navigation = useNavigation();
   const { currentUser } = useFetchUsers(currentUserID);
   const dispatch = useDispatch();
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
@@ -27,7 +29,9 @@ const Profile = ({ navigation, currentUserID }: Props) => {
 
   const confirmLogout =async () => {
     await dispatch(logoutUser() as never);
-    setShowLogoutConfirmation(false); // Fermez l'alerte après la confirmation
+    // Rediriger l'utilisateur vers la page de connexion
+    setShowLogoutConfirmation(false); // 
+    navigation.navigate("Login");
   };
 
   

@@ -104,9 +104,6 @@ export default function ShowTask({ route, currentUserID }: Props) {
               {!isEmpty(dateFormatted as any) ? dateFormatted : "Non renseigné"}
             </TextScheduleDate>
           </ContainerInfoDate>
-          <TextSchedule>
-            {!isEmpty(start) ? start : ""} - {!isEmpty(end) ? end : ""}
-          </TextSchedule>
         </ContainerSchedule>
 
         {/* <ContainerLocation>
