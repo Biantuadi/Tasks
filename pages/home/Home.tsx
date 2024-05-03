@@ -22,7 +22,7 @@ export default function HomeScreen({ navigation, currentUserID }: Props) {
       <Header activeEntity={activeEntity} currentUser={currentUser} setActiveEntity={setActiveEntity} />
       <FlatList
         data={!isEmpty(allTasks) && allTasks.filter((task:any) => {
-          if (activeEntity === "Todo") return true;
+          // if (activeEntity === "Todo") return true;
           return task.status && task.status.toLowerCase() === activeEntity.toLowerCase();
         }) }
         renderItem={({ item }) => <TaskCard item={item} navigation={navigation} currentUserID={currentUserID} currentUser={currentUser} />}

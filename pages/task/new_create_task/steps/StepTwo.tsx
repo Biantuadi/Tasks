@@ -23,7 +23,7 @@ const StepTwo: React.FC<Props> = ({ onPrevious, onNext, onInputChange }) => {
     const currentDate = selectedDate || selectedDate;
     setShowDatePicker(Platform.OS === 'ios');
     setSelectedDate(currentDate || null);
-    onInputChange('date', currentDate || new Date());
+    onInputChange('dueDate', currentDate || new Date());
   };
 
   return (
@@ -50,7 +50,7 @@ const StepTwo: React.FC<Props> = ({ onPrevious, onNext, onInputChange }) => {
       </View>
 
       <TouchableOpacity style={styles.selector} onPress={() => setShowDatePicker(true)}>
-        <Text>{selectedDate ? selectedDate.toLocaleDateString() : "Entrez la date"}</Text>
+        <Text>{selectedDate ? selectedDate.toLocaleDateString() : "Entrez la date de fin"}</Text>
       </TouchableOpacity>
       {showDatePicker && (
         <DateTimePicker

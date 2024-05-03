@@ -29,18 +29,18 @@ const Calendar: React.FC<CalendarProps> = ({ navigation, currentUserID }) => {
     navigation.navigate("ShowTask", { taskData: task });
   };
 
-  const renderEvents = (date: string) => {
-    // Convertir la date au format Date
-    const selectedDate = new Date(date);
+  const renderEvents = (dueDate: string) => {
+    // Convertir la dueDate au format Date
+    const selectedDate = new Date(dueDate);
   
-    // Formater la date au format "Jour Date" (par exemple, "Monday 20") en français
+    // Formater la dueDate au format "Jour Date" (par exemple, "Monday 20") en français
     const formattedDate = format(selectedDate, "eeee d", {
       locale: frLocale,
     } as any);
   
-    // Filtrer les événements en fonction de la date sélectionnée
+    // Filtrer les événements en fonction de la dueDate sélectionnée
     const filteredTaskForDate: any[] = allTasks.filter(
-      (task: any) => task.date === date
+      (task: any) => task.dueDate === dueDate
     );
   
     // Trier les tasks par heure de début
@@ -102,8 +102,8 @@ const Calendar: React.FC<CalendarProps> = ({ navigation, currentUserID }) => {
               acc: Record<string, { marked: boolean; dotColor: string }>,
               task: any
             ) => {
-              if (!acc[task.date]) {
-                acc[task.date] = { marked: true, dotColor: "#6366f1" };
+              if (!acc[task.dueDate]) {
+                acc[task.dueDate] = { marked: true, dotColor: "#6366f1" };
               }
               return acc;
             },

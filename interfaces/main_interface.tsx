@@ -28,13 +28,20 @@ export interface User {
 //   meetLink?: string;
 //   description?: string;
 // }
-
+// id: "1",
+//     title: "Task 1",
+//     description: "Description for task 1",
+//     status: "Todo",
+//     dueDate: "2021-12-01",
+//     priority: "High",
 export interface Task {
   id?: string;
   title: string;
-  date: string;
-  creator_id: string;
-  asignTo?: [string];
-  status: string;
+  dueDate: string;
   description?: string;
+  status: string;
+  priority?: string;
+  creator_id: string;
+  assignee_id: string;
+  createdAt?: any;
 }

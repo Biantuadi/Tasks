@@ -31,7 +31,7 @@ export default function ShowTask({ route, currentUserID }: Props) {
 
 
   const { taskData } = route.params;
-  const { title, date, start, end, address, city, description, meetLink } = taskData;
+  const { title, dueDate, start, end, address, city, description, meetLink } = taskData;
 
   const { allUsers } = useFetchUsers();
 
@@ -40,8 +40,8 @@ export default function ShowTask({ route, currentUserID }: Props) {
   const author = findAuthor(allUsers, taskData);
 
   const dateFormatted =
-    !isEmpty(date) &&
-    format(new Date(date), "EEEE, d MMMM", {
+    !isEmpty(dueDate) &&
+    format(new Date(dueDate), "EEEE, d MMMM", {
       locale: frLocale,
     } as any);
 
@@ -106,21 +106,6 @@ export default function ShowTask({ route, currentUserID }: Props) {
           </ContainerInfoDate>
         </ContainerSchedule>
 
-        {/* <ContainerLocation>
-          <Ionicons name="location-outline" size={30} color="#30374b65" />
-          <TextLocation>{capitalizeFirstLetter(`${address}`)}</TextLocation>
-        </ContainerLocation> */}
-
-        {/* <Separator />
-
-        <ContainerLinkMeet>
-          <ContainerInfoDate>
-            <Ionicons name="videocam-outline" size={30} color="#30374b65" />
-            <TextScheduleDate>Lien meet</TextScheduleDate>
-          </ContainerInfoDate>
-          <TextLinkMeet>{ meetLink ? capitalizeFirstLetter(`${meetLink}`): "Non renseigné"}</TextLinkMeet>
-        </ContainerLinkMeet> */}
-
         <Separator />
 
         <ContainerDescription>
@@ -129,13 +114,6 @@ export default function ShowTask({ route, currentUserID }: Props) {
             {description ? capitalizeFirstLetter(description) : "Non renseigné"}
           </TextDescription>
         </ContainerDescription>
-
-        {/* <Separator /> */}
-
-        {/* <ContainerReminder>
-          <Ionicons name="notifications-outline" size={30} color="#30374b65" />
-          <TextReminder>30 minutes avant</TextReminder>
-        </ContainerReminder> */}
 
         <ContzinerInfoCreator>
           <TextCreator>Créé par</TextCreator>

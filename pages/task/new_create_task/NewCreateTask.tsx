@@ -7,21 +7,23 @@ import StepTwo from "./steps/StepTwo";
 import { Task } from "../../../interfaces/main_interface";
 import styled from "styled-components/native";
 
+
 interface Props {
   currentUserID: string;
 }
 
 const CreateTask: React.FC<Props> = ({ currentUserID }) => {
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const pagerViewRef = useRef<PagerView>(null);
+  const pagerViewRef = useRef<any>(null);
 
   const [task, setTask] = useState<Task>({
+    id: "",
     title: "",
-    date: "",
-    address: "",
-    meetLink: "",
+    dueDate: "",
     creator_id: currentUserID,
     status: "Todo",
+    priority: "Medium",
+    assignee_id: "",
   });
 
   const handleTaskChange = (key: keyof Task, value: string) => {
@@ -30,20 +32,18 @@ const CreateTask: React.FC<Props> = ({ currentUserID }) => {
 
   const isDateValid = () => {
     const now = new Date();
-    const selectedDate = new Date(task.date);
+    const selectedDate = new Date(task.dueDate);
     return selectedDate >= now;
   };
   
   const nextPage = () => {
-    const { title, date, address } = task;
+    const { title, dueDate } = task;
     if (title.trim() === "") {
       alert("Veuillez renseigner un titre avant de continuer.");
-    } else if (currentStep === 1 && date === "") {
-      alert("Veuillez renseigner une date et une heure de début avant de continuer.");
+    } else if (currentStep === 1 && dueDate === "") {
+      alert("Veuillez renseigner une dueDate et une heure de début avant de continuer.");
     } else if (currentStep === 1 && !isDateValid()) {
-      alert("La date doit être supérieure ou égale à la date actuelle.");
-    }  else if (currentStep === 2 && address === "") {
-      alert("Veuillez renseigner une adresse avant de continuer.");
+      alert("La dueDate doit être supérieure ou égale à la dueDate actuelle.");
     } else {
       const nextPage = currentStep + 1;
       setCurrentStep(nextPage);

@@ -5,6 +5,7 @@ import { isEmpty, today } from "../../utils/base_utils";
 import { formatDate } from "../../utils/base_utils";
 import Button from "../../components/Button";
 import { useNavigation } from "@react-navigation/native";
+import useFetchTasks from "../../hooks/taskFetch";
 
 interface HeaderProps {
   activeEntity: string;
@@ -18,6 +19,12 @@ export default function Header({
   currentUser,
 }: HeaderProps) {
   const navigation = useNavigation();
+  const allTasks = useFetchTasks();
+
+  const getLenghtOfStatus = (status: string) => {
+    return allTasks.filter((task) => task.status === status).length;
+  }
+  
 
   return (
     <HeaderContainer>
@@ -28,10 +35,7 @@ export default function Header({
             <TextTitle>
               Hello,{" "}
               {!isEmpty(currentUser) &&
-              currentUser.role &&
-              currentUser.role.toLowerCase() === "pasteur"
-                ? "Pasteur"
-                : currentUser?.firstname}
+                 currentUser?.firstname}
             </TextTitle>
             <TextSubtitle>{formatDate(today)}</TextSubtitle>
           </ContainerText>
@@ -86,7 +90,7 @@ export default function Header({
                   color: activeEntity === status ? "#30374b" : "#a0a3bd",
                 }}
               >
-                {status}
+                {status} ({getLenghtOfStatus(status)})
               </EntityTitle>
             </EntityContainer>
           </EntityButton>

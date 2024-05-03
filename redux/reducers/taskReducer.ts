@@ -16,7 +16,7 @@ const taskReducer = createReducer(initialState, (builder:any) => {
       return {
         ...state,
         tasks: action.payload.sort((a:any, b:any) => {
-          return new Date(b.date).getTime() - new Date(a.date).getTime();
+          return new Date(b.dueDate).getTime() - new Date(a.dueDate).getTime();
         }),
       };
     })

@@ -41,12 +41,12 @@ const StepThree: React.FC<Props> = ({ onPrevious, onInputChange, task, currentUs
   };
 
   const formatTaskData = (task: Task, currentUserID: string): Task => {
-    const formattedDate = task.date.toISOString().split("T")[0];
+    const formattedDate = task.dueDate.toISOString().split("T")[0];
    
 
     return {
       ...task,
-      date: formattedDate,
+      dueDate: formattedDate,
       creator_id: currentUserID,
     };
   };

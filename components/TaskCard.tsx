@@ -3,6 +3,7 @@ import styled from "styled-components/native";
 import CircleAvatar from "./CircleAvatar";
 import capitalizeFirstLetter, {
   ellipsisText,
+  findAssigned,
   findAuthor,
   isEmpty,
   showMessage,
@@ -23,6 +24,7 @@ export default function TaskCard({
   const { allUsers } = useFetchUsers();
 
   const author = findAuthor(allUsers, item);
+  const assigned = findAssigned(allUsers, item);
 
   const handleCardPress = () => {
     navigation.navigate("ShowTask", { taskData: item });
@@ -44,6 +46,8 @@ export default function TaskCard({
   };
 
   const isAuthor = item.creator_id === currentUserID;
+  const isAssigned = item.assignee_id === currentUserID;
+  
 
   return (
     <>
@@ -51,7 +55,7 @@ export default function TaskCard({
         activeOpacity={0.7}
         onPress={handleCardPress}
         onLongPress={
-          isAuthor || currentUser?.role.toLowerCase() === "pasteur"
+          isAuthor 
             ? handleCardLongPress
             : () =>
                 showMessage("Vous n'êtes pas autorisé à supprimer ce task")
@@ -62,41 +66,48 @@ export default function TaskCard({
           <BadgeContainer>
             <BadgeText>{capitalizeFirstLetter(item.status)}</BadgeText>
           </BadgeContainer>
-          <TypeText>
+
+          {/* <TypeText>
             {item.type && item.type !== null
               ? capitalizeFirstLetter(item.type)
               : "Type"}
-          </TypeText>
+          </TypeText> */}
+
+           {!isEmpty(author) && author?.firstname && author?.id && (
+              <TypeText>
+                {author?.id == currentUserID && "Supprimer" 
+                 }
+              </TypeText>
+            )}
+
         </BadgeAndType>
 
         <ContainerTitle>
           <Title>{ellipsisText(item.title, 19)}</Title>
-          {/* <SubTitle>{`${item.start} - ${item.end}`}</SubTitle> */}
-          {!isEmpty(author) && author?.firstname && author?.id && (
+          
+          {/* {!isEmpty(author) && author?.firstname && author?.id && (
               <SubTitle>
-                {author?.id === currentUserID
-                  ? "Créé par vous"
-                  : author?.role.toLowerCase() === "pasteur"
-                  ? "Créé par le pasteur"
-                  : `Créé par ${author.firstname}`}
+                {author?.id == currentUserID
+                  ? "Créé par vous" : `Créé par ${author.firstname}`
+                 }
               </SubTitle>
-            )}
+            )} */}
+
         </ContainerTitle>
 
         <Footer>
           <ContainerInfo>
-          {!isEmpty(author) && author?.firstname && author?.id && (
+            {!isEmpty(assigned) && assigned?.firstname && assigned?.id && (
               <TextInfo>
-                {author?.id === currentUserID
-                  ? "Assigné à"
-                  : author?.role.toLowerCase() === "pasteur"
-                  ? "Créé par le pasteur"
-                  : `Créé par ${author.firstname}`}
+                {assigned?.id === currentUserID
+                  ? "Assigné à vous"
+                  : `Assigné à ${assigned.firstname}`}
               </TextInfo>
             )}
-            {!isEmpty(author) && author?.avatar && (
+
+            {!isEmpty(assigned) && assigned?.firstname && (
               <CircleAvatar
-                image={author.avatar}
+                image={assigned.avatar}
                 style={{ width: 20, height: 20 }}
               />
             )}
