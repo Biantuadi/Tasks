@@ -8,7 +8,7 @@ export const fetchMeSuccess = createAction("FETCH_ME_SUCCESS");
 export const fetchAllUsers = () => async (dispatch:any) => {
   try {
     const users = await getAllUsers();
-    dispatch(fetchAllUsersSuccess(users));
+    dispatch(fetchAllUsersSuccess( users as any));
   } catch (error) {
     console.error("Error fetching all users:", error);
   }

@@ -48,14 +48,14 @@ export default function ShowTask({ route, currentUserID }: Props) {
   const navigation = useNavigation();
 
   const authorDisplayName = (author: any): string => {
-    if (author?.uid === currentUserID) return "moi";
+    if (author?.id === currentUserID) return "moi";
     if (author?.role.toLowerCase() === "pasteur")
       return `Pasteur ${author.firstname}`;
     return author?.firstname || "";
   };
 
   const handleDeleteConfirm = async () => {
-    await dispatch(deleteTaskAsync(taskData.uid) as any);
+    await dispatch(deleteTaskAsync(taskData.id) as any);
     setShowDeleteConfirmation(false);
     navigation.goBack();
   };
@@ -73,7 +73,7 @@ export default function ShowTask({ route, currentUserID }: Props) {
           </TouchableOpacity>
 
           <ContainerActions>
-            {(author?.uid === currentUserID ||
+            {(author?.id === currentUserID ||
               currentUser?.role.toLowerCase() === "pasteur") && (
               <>
                 <TouchableOpacity onPress={() => console.log("update")}>
@@ -143,7 +143,7 @@ export default function ShowTask({ route, currentUserID }: Props) {
         <ContzinerInfoCreator>
           <TextCreator>Créé par</TextCreator>
           <TextName>{authorDisplayName(author)}</TextName>
-          {author?.uid && author?.uid !== currentUserID && (
+          {author?.id && author?.id !== currentUserID && (
             <CircleAvatar
               image={author?.avatar}
               style={{ transform: [{ scale: 0.6 }] }}

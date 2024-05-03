@@ -26,7 +26,7 @@ export default function App() {
         const userString = await AsyncStorage.getItem("user");
         if (userString) {
           const userObject = JSON.parse(userString);
-          setUser(userObject);
+          setUser(userObject.user);
         }
       } catch (error) {
         console.error("Error retrieving user from AsyncStorage:", error);
@@ -37,6 +37,7 @@ export default function App() {
 
     fetchUser();
   }, []);
+
 
   if (initializing) {
     return null; // Ou un indicateur de chargement
@@ -72,16 +73,16 @@ function ProtectedScreens({ user }: { user: any }) {
   return (
     <ProtectedStack.Navigator screenOptions={{ headerShown: false }}>
       <ProtectedStack.Screen name="MainApp">
-        {(props) => <MyTabs {...props} userID={user?.uid} />}
+        {(props) => <MyTabs {...props} userID={user?.id} />}
       </ProtectedStack.Screen>
       <ProtectedStack.Screen name="EditProfile" component={EditProfile} />
       <ProtectedStack.Screen name="ShowTask">
         {(props: { route: any }) => (
-          <ShowTask {...props} currentUserID={user?.uid} />
+          <ShowTask {...props} currentUserID={user?.id} />
         )}
       </ProtectedStack.Screen>
       <ProtectedStack.Screen name="createTask">
-        {(props) => <NewCreateTask {...props} currentUserID={user?.uid} />}
+        {(props) => <NewCreateTask {...props} currentUserID={user?.id} />}
       </ProtectedStack.Screen>
     </ProtectedStack.Navigator>
   );

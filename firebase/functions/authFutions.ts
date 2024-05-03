@@ -24,7 +24,7 @@ export async function register(
 
     // Add user data to Firestore
     await addDoc(collection(getFirestore(app), "users"), {
-      uid: user.uid,
+      id: user.id,
       email: user.email,
       firstname: firstname,
       lastname: lastname,

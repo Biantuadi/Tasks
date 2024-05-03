@@ -6,10 +6,11 @@ import axios from "axios";
 
 // Variable statique pour simuler les données utilisateur authentifiées
 const loggedUser = {
-  email: "test@example.com",
-  firstname: "John",
-  lastname: "Doe",
-  uid: "123456789",
+  id: 234,
+email: "john@doe.com",
+firstname: "John",
+lastname: "Doe",
+  avatar: "https://randomuser.me/api/portraits"
 };
 
 // Fonction pour simuler une connexion

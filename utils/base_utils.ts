@@ -22,7 +22,7 @@ export const formatDate = (date: string) => {
 };
 
 export const findAuthor =  (users : any , item : any) => {
-  return  users.find((user: any) =>user.uid === item.creator_id);
+  return  users.find((user: any) =>user.id === item.creator_id);
 }
 
 // Fonction pour afficher un message en fonction de la plateforme

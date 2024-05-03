@@ -40,7 +40,7 @@ export default function Header( { currentUser }: HeaderProps) {
 
       <>
         <ContainerAvatar>
-          <CircleAvatar image={currentUser.avatar} />
+          <CircleAvatar image={currentUser?.avatar} />
         </ContainerAvatar>
       </>
 

@@ -1,5 +1,5 @@
 export interface User {
-  uid: string;
+  id: string;
   email: string;
   firstname: string;
   lastname: string;
@@ -14,7 +14,7 @@ export interface User {
 }
 
 // export interface Task {
-//   uid?: string;
+//   id?: string;
 //   title: string;
 //   type?: string;
 //   date: string;
@@ -30,7 +30,7 @@ export interface User {
 // }
 
 export interface Task {
-  uid?: string;
+  id?: string;
   title: string;
   date: string;
   creator_id: string;

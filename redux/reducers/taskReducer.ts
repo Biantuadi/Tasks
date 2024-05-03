@@ -15,8 +15,6 @@ const taskReducer = createReducer(initialState, (builder:any) => {
     .addCase(fetchAllTasksSuccess, (state:any, action:any) => {
       return {
         ...state,
-        // tasks: action.payload,
-        // Trier les tasks par date, du plus récent au plus ancien
         tasks: action.payload.sort((a:any, b:any) => {
           return new Date(b.date).getTime() - new Date(a.date).getTime();
         }),
@@ -31,7 +29,7 @@ const taskReducer = createReducer(initialState, (builder:any) => {
     .addCase(deleteTaskSuccess, (state:any, action:any) => {
       return {
         ...state,
-        tasks: state.tasks.filter((task:Task) => task.uid !== action.payload),
+        tasks: state.tasks.filter((task:Task) => task.id !== action.payload),
       };
     })
     .addMatcher(

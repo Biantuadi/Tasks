@@ -30,6 +30,8 @@ const Profile = ({ navigation, currentUserID }: Props) => {
     setShowLogoutConfirmation(false); // Fermez l'alerte après la confirmation
   };
 
+  
+
   return (
     <Container>
       <StatusBar style="auto" backgroundColor={"#F5F7F9"} />

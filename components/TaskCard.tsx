@@ -35,7 +35,7 @@ export default function TaskCard({
   };
 
   const handleDeleteConfirm = () => {
-    dispatch(deleteTaskAsync(item.uid) as any);
+    dispatch(deleteTaskAsync(item.id) as any);
     setShowDeleteConfirmation(false);
   };
 
@@ -80,9 +80,9 @@ export default function TaskCard({
                 style={{ width: 22, height: 22 }}
               />
             )}
-            {!isEmpty(author) && author?.firstname && author?.uid && (
+            {!isEmpty(author) && author?.firstname && author?.id && (
               <TextInfo>
-                {author?.uid === currentUserID
+                {author?.id === currentUserID
                   ? "Créé par vous"
                   : author?.role.toLowerCase() === "pasteur"
                   ? "Créé par le pasteur"

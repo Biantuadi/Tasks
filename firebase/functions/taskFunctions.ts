@@ -11,7 +11,7 @@ export async function getAllTasksFirebase() {
     // Récupérer les données du document
     const data = doc.data();
     // Inclure l'ID du document dans les données
-    const taskWithId = { uid: doc.id, ...data };
+    const taskWithId = { id: doc.id, ...data };
     // Ajouter les données du task à la liste des tasks
     tasks.push(taskWithId);
   });
@@ -26,7 +26,7 @@ export async function addTaskToFirestore(task: Task) {
     // Ajoutez le task à la collection "tasks"
     const docRef = await addDoc(collection(firestore, "tasks"), task);
     // ajouter l'id au task
-    task.uid = docRef.id;
+    task.id = docRef.id;
 
     const successMessage = "Task ajouté avec succès";
     showMessage(successMessage);
