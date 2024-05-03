@@ -3,7 +3,7 @@ const fakeUser = {
 email: "john@doe.com",
 firstname: "John",
 lastname: "Doe",
-  avatar: "https://randomuser.me/api/portraits"
+  avatar: "https://avatars.githubusercontent.com/u/98918466?v=4"
 };
 
 export const users = [
@@ -12,7 +12,7 @@ export const users = [
   email: "john@doe.com",
   firstname: "John",
   lastname: "Doe",
-    avatar: "https://randomuser.me/api/portraits"
+    avatar: "https://avatars.githubusercontent.com/u/98918466?v=4"
   },
   {
     id: 2,
