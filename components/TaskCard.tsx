@@ -37,7 +37,7 @@ export default function TaskCard({
   };
 
   const handleDeleteConfirm = () => {
-    dispatch(deleteTaskAsync(item.id) as any);
+    dispatch(deleteTaskAsync(item._id) as any);
     setShowDeleteConfirmation(false);
   };
 
@@ -73,9 +73,9 @@ export default function TaskCard({
               : "Type"}
           </TypeText> */}
 
-           {!isEmpty(author) && author?.firstname && author?.id && (
+           {!isEmpty(author) && author?.firstname && author?._id && (
               <TypeText>
-                {author?.id == currentUserID && "Supprimer" 
+                {author?._id == currentUserID && "Supprimer" 
                  }
               </TypeText>
             )}
@@ -85,9 +85,9 @@ export default function TaskCard({
         <ContainerTitle>
           <Title>{ellipsisText(item.title, 19)}</Title>
           
-          {/* {!isEmpty(author) && author?.firstname && author?.id && (
+          {/* {!isEmpty(author) && author?.firstname && author?._id && (
               <SubTitle>
-                {author?.id == currentUserID
+                {author?._id == currentUserID
                   ? "Créé par vous" : `Créé par ${author.firstname}`
                  }
               </SubTitle>
@@ -97,9 +97,9 @@ export default function TaskCard({
 
         <Footer>
           <ContainerInfo>
-            {!isEmpty(assigned) && assigned?.firstname && assigned?.id && (
+            {!isEmpty(assigned) && assigned?.firstname && assigned?._id && (
               <TextInfo>
-                {assigned?.id === currentUserID
+                {assigned?._id === currentUserID
                   ? "Assigné à vous"
                   : `Assigné à ${assigned.firstname}`}
               </TextInfo>

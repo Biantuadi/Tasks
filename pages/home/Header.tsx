@@ -90,7 +90,14 @@ export default function Header({
                   color: activeEntity === status ? "#30374b" : "#a0a3bd",
                 }}
               >
-                {status} ({getLenghtOfStatus(status)})
+                {
+                  status === "Todo"
+                    ? "Todo 🚫"
+                    : status === "Doing"
+                    ? "Doing 🔄"
+                    : "Done ✅"
+                }
+                {/* ({getLenghtOfStatus(status)}) */}
               </EntityTitle>
             </EntityContainer>
           </EntityButton>

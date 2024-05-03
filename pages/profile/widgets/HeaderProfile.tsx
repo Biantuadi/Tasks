@@ -24,18 +24,6 @@ export default function Header( { currentUser }: HeaderProps) {
         <TextTitle>
           Profile
         </TextTitle>
-
-        <ContainerLogoNotification>
-          {/* <IconContainer
-            onPress={() => console.log("Notification")}
-            activeOpacity={0.7}
-          >
-            <Ionicons name="notifications-outline" size={22} color="#1E263B" />
-            <ContainerNotifs>
-             <TextNotification>3+</TextNotification>
-           </ContainerNotifs>
-          </IconContainer> */}
-        </ContainerLogoNotification>
       </TopHeader>
 
       <>

@@ -1,38 +1,30 @@
-const fakeUser = {
-  id: 234,
-email: "john@doe.com",
-firstname: "John",
-lastname: "Doe",
-  avatar: "https://avatars.githubusercontent.com/u/98918466?v=4"
-};
-
-export const users = [
-  {
-    id: 234,
-  email: "john@doe.com",
-  firstname: "John",
-  lastname: "Doe",
-    avatar: "https://avatars.githubusercontent.com/u/98918466?v=4"
-  },
-  {
-    id: 2,
-    firstname: "Jane",
-    email: "test@",
-    avatar: "https://letambour.net/wp-content/uploads/2024/01/FB_IMG_1704274242647.jpg",
-    role: "pasteur"
-  },
-]
+import axios from "axios";
+import { API_ENDPOINTS } from "../config/apiConfig";
 
 export async function getAllUsers() {
-  // const users:any = [];
-  return users;
+  try {
+    const response = await axios.get(API_ENDPOINTS.ALL_USERS);
+    return response.data;
+    
+  } catch (error) {
+    console.error("Error fetching all users:", error);
+  }
+}
+
+export async function getGroups(){
+  try {
+    const response = await axios.get(API_ENDPOINTS.ALL_GROUPS);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching all groups:", error);
+  }
+  
 }
 
 
 
 export async function getUserById(userId: string) {
-  const user:any = {
-    
-  };
-  return fakeUser;
+  const response:any = axios.get(API_ENDPOINTS.USER_BY_ID(userId))
+  
+  return response.data;
 }

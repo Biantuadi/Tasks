@@ -17,8 +17,10 @@ interface Props {
 }
 
 const Profile = ({  currentUserID }: Props) => {
+  
   const navigation = useNavigation();
   const { currentUser } = useFetchUsers(currentUserID);
+
   const dispatch = useDispatch();
   const [showLogoutConfirmation, setShowLogoutConfirmation] = useState(false);
 

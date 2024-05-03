@@ -6,6 +6,7 @@ import TaskCard from "../../components/TaskCard";
 import useFetchUsers from "../../hooks/userFetch";
 import useFetchTasks from "../../hooks/taskFetch";
 import { isEmpty } from "../../utils/base_utils";
+import { useSelector } from "react-redux";
 
 type Props = {
   navigation: any; // Type de navigation
@@ -16,6 +17,7 @@ export default function HomeScreen({ navigation, currentUserID }: Props) {
   const [activeEntity, setActiveEntity] = useState("Todo");
   const currentUser = useFetchUsers(currentUserID).currentUser;
   const allTasks:any = useFetchTasks();
+  
 
   return (
     <SafeAreaView style={styles.container}>

@@ -1,12 +1,12 @@
 export const users = [
   {
-    id: 1,
+    _id: 1,
     firstname: "Theo",
     email: "test@",
     avatar: "https://randomuser.me/api/portraits"
   },
   {
-    id: 2,
+    _id: 2,
     firstname: "Jane",
     email: "test@",
     avatar: "https://letambour.net/wp-content/uploads/2024/01/FB_IMG_1704274242647.jpg",
@@ -16,7 +16,7 @@ export const users = [
 
 export const fakeDataTasks = [
   {
-    id: 1,
+    _id: 1,
     title: "prise de parole en public",
     type: "masterclass",
     dueDate: "2024-02-16",
@@ -29,7 +29,7 @@ export const fakeDataTasks = [
     status: "Todo",
   },
   {
-    id: 2,
+    _id: 2,
     title: "Jesus sauve",
     type: "predication",
     dueDate: "2024-02-16",
@@ -42,7 +42,7 @@ export const fakeDataTasks = [
     status: "Doing",
   },
   {
-    id: 3,
+    _id: 3,
     title: "concert gael",
     type: "musique",
     dueDate: "2022-10-16",
@@ -56,7 +56,7 @@ export const fakeDataTasks = [
     status: "Done",
   },
   {
-    id: 4,
+    _id: 4,
     title: "Le travail en equipe",
     type: "conference",
     dueDate: "2024-02-18",
@@ -70,7 +70,7 @@ export const fakeDataTasks = [
     status: "Todo",
   },
   {
-    id: 5,
+    _id: 5,
     title: "Devenir un leader",
     type: "musique",
     dueDate: "2022-10-16",

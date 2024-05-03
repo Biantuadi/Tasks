@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUsers } from "../redux/actions/userAction";
+import { fetchAllUsers, fetchGroups } from "../redux/actions/userAction";
 import { isEmpty } from "../utils/base_utils";
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function useFetchUsers( currentUserID?: string | null | undefined) {
+
+  
+  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -12,14 +14,30 @@ export default function useFetchUsers( currentUserID?: string | null | undefined
   }, [dispatch]); // Ajoutez dispatch dans les dépendances du useEffect
 
   const allUsers = useSelector((state: any) => state.user.allUsers);
-  // console.log(allUsers);
-  // console.log(AsyncStorage.getItem('user'));
+
+
   
-  
-  const currentUser = !isEmpty(allUsers) && allUsers.find((user: any) => user.id === currentUserID);
+  const currentUser = currentUserID &&  allUsers?.find((user: any) => user._id === currentUserID);
 
   return  {
      allUsers, 
      currentUser
     };
+}
+
+export function useFetchGroups(currentUserID?: string | null | undefined ) {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchGroups() as any); // Récupérer tous les groupes
+  }, [dispatch]); // Ajoutez dispatch dans les dépendances du useEffect
+
+  const groups = useSelector((state: any) => state.user.groups);
+  const myGroup = groups.find((group: any) => {
+    return group.members.some((member: any) => member._id === currentUserID);
+  });
+
+  
+
+  return myGroup;
 }

@@ -17,7 +17,6 @@ const CreateTask: React.FC<Props> = ({ currentUserID }) => {
   const pagerViewRef = useRef<any>(null);
 
   const [task, setTask] = useState<Task>({
-    id: "",
     title: "",
     dueDate: "",
     creator_id: currentUserID,

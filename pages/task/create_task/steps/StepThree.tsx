@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import { Task } from "../../../../interfaces/main_interface";
 import { addTaskAsync } from "../../../../redux/actions/taskAction";
 import { Picker } from "@react-native-picker/picker";
+import { useFetchGroups } from "../../../../hooks/userFetch";
+import { isEmpty } from "../../../../utils/base_utils";
 
 interface Props {
   onPrevious: () => void;
@@ -21,6 +23,8 @@ interface Props {
 const StepThree: React.FC<Props> = ({ onPrevious, onInputChange, task, currentUserID }) => {
   const navigation = useNavigation();
   const [loading, setLoading] = useState(false);
+
+  const myGroup = useFetchGroups(currentUserID);
 
   const dispatch = useDispatch();
 
@@ -68,33 +72,26 @@ const StepThree: React.FC<Props> = ({ onPrevious, onInputChange, task, currentUs
         <Image source={Done} style={{ width: 300, height: 300 }} />
       </View>
 
-      {/* Champs de texte */}
-      {/* <TextInputStyled
-        value={task.address}
-        onChangeText={(text) => onInputChange('address', text)}
-        placeholder="Address"
-      />
-
-      <TextInputStyled
-        value={task.meetLink}
-        onChangeText={(text) => onInputChange('city', text)}
-        placeholder="meet link (Optional)"
-      /> */}
-
       <Text>
         Assigné à
       </Text>
     <View style={pickerContainerStyle as any}>
         <Picker
-          selectedValue={task.status || "Todo"}
+          selectedValue={
+            task.assignee_id === currentUserID ? currentUserID : task.assignee_id
+          }
           onValueChange={(itemValue, itemIndex) =>
-            onInputChange("status", itemValue)
+            onInputChange("assignee_id", itemValue as string)
           }
           style={pickerStyle}
         >
-          <Picker.Item label="Todo" value="Todo" />
-          <Picker.Item label="Done" value="Done" />
-          <Picker.Item label="Doing" value="Doing" />
+          {!isEmpty(myGroup) && myGroup?.members.map((member: any) => (
+            <Picker.Item
+              key={member._id}
+              label={member._id === currentUserID ? "Moi" : member.firstname + " " + member.lastname}
+              value={member._id }
+            />
+          ))}
         </Picker>
       </View>
 

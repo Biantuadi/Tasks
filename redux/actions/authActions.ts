@@ -13,6 +13,7 @@ export const loginUser = (email:string, password:string) => async (dispatch:any)
   try {
     // Call the login function from your API to authenticate the user
     const user:any = await login(email, password);
+    
     // Store the user data in AsyncStorage
     await AsyncStorage.setItem('user', JSON.stringify(user));
     // Dispatch the loginSuccess action with the user data

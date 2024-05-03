@@ -1,7 +1,7 @@
 // reducers/taskReducer.js
 
 import { createReducer } from "@reduxjs/toolkit";
-import { addTaskSuccess, deleteTaskSuccess, fetchAllTasksSuccess } from "../actions/taskAction";
+import { addTaskSuccess, deleteTaskSuccess, fetchAllTasksSuccess, updateTaskSuccess } from "../actions/taskAction";
 import { Task } from "../../interfaces/main_interface";
 
 const initialState = {
@@ -26,10 +26,18 @@ const taskReducer = createReducer(initialState, (builder:any) => {
         tasks: [...state.tasks, action.payload],
       };
     })
+    .addCase(updateTaskSuccess, (state:any, action:any) => {
+      return {
+        ...state,
+        tasks: state.tasks.map((task:Task) =>
+          task._id === action.payload._id ? action.payload : task
+        ),
+      };
+    })
     .addCase(deleteTaskSuccess, (state:any, action:any) => {
       return {
         ...state,
-        tasks: state.tasks.filter((task:Task) => task.id !== action.payload),
+        tasks: state.tasks.filter((task:Task) => task._id !== action.payload),
       };
     })
     .addMatcher(

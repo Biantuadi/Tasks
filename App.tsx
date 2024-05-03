@@ -10,7 +10,7 @@ import Register from "./pages/auth/register/Register";
 import { MyTabs } from "./components/layouts/BottomNavigation";
 import EditProfile from "./pages/profile/EditProfile";
 import ShowTask from "./pages/task/ShowTask";
-import NewCreateTask from "./pages/task/new_create_task/NewCreateTask";
+import CreateTask from "./pages/task/create_task/CreateTask";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Stack = createNativeStackNavigator();
@@ -73,16 +73,16 @@ function ProtectedScreens({ navigation, route }: { navigation: any; route: any }
   return (
     <ProtectedStack.Navigator screenOptions={{ headerShown: false }}>
       <ProtectedStack.Screen name="MainApp">
-        {(props) => <MyTabs {...props} userID={user?.id} />}
+        {(props) => <MyTabs {...props} userID={user?._id} />}
       </ProtectedStack.Screen>
       <ProtectedStack.Screen name="EditProfile" component={EditProfile} />
       <ProtectedStack.Screen name="ShowTask">
         {(props: { route: any }) => (
-          <ShowTask {...props} currentUserID={user?.id} />
+          <ShowTask {...props} currentUserID={user?._id} />
         )}
       </ProtectedStack.Screen>
       <ProtectedStack.Screen name="createTask">
-        {(props) => <NewCreateTask {...props} currentUserID={user?.id} />}
+        {(props) => <CreateTask {...props} currentUserID={user?._id} />}
       </ProtectedStack.Screen>
     </ProtectedStack.Navigator>
   );

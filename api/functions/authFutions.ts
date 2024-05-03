@@ -6,7 +6,7 @@ import axios from "axios";
 
 // Variable statique pour simuler les données utilisateur authentifiées
 const loggedUser = {
-  id: 234,
+  _id: 234,
   email: "john@doe.com",
   firstname: "John",
   lastname: "Doe",
@@ -16,8 +16,7 @@ const loggedUser = {
 // Fonction pour simuler une connexion
 export async function login(email: string, password: string) {
   try {
-    // Simuler une requête API réussie en utilisant les données de l'utilisateur simulées
-    const response = { data: { token: "mockToken", user: loggedUser } };
+    const response = await axios.post(API_ENDPOINTS.LOGIN, {email, password })
 
     // Afficher le message de succès
     showMessage("Connexion réussie");
@@ -26,7 +25,7 @@ export async function login(email: string, password: string) {
     return response.data;
   } catch (error: any) {
     // Gérer les erreurs ici si nécessaire
-    console.error("Error during login:", error);
+    console.error("Error during logins : ", error.message);
     throw error; // Propager l'erreur vers l'appelant
   }
 }

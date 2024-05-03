@@ -22,11 +22,11 @@ export const formatDate = (date: string) => {
 };
 
 export const findAuthor =  (users : any , item : any) => {
-  return  users.find((user: any) =>user.id == item.creator_id);
+  return !isEmpty(users) &&  users.find((user: any) =>user._id == item.creator_id);
 }
 
 export const findAssigned =  (users : any , item : any) => {
-  return  users.find((user: any) => user.id == item.assignee_id);
+  return !isEmpty(users) &&  users.find((user: any) => user._id == item.assignee_id);
 }
 
 // Fonction pour afficher un message en fonction de la plateforme
